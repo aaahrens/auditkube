@@ -2,8 +2,8 @@
     "variables": {
         "ami": "k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02",
         "region": "{{ env `AWS_REGION` }}",
-        "aws_access_key": "{{ env `AWS_ACCESS_KEY` }}",
-        "aws_secret_key": "{{ env `AWS_SECRET_KEY` }}",
+        "aws_access_key_id": "{{ env `AWS_ACCESS_KEY_ID` }}",
+        "aws_secret_access_key": "{{ env `AWS_SECRET_ACCESS_KEY` }}",
         "cloudwatch_aws_access_key_id": "{{ env `CLOUDWATCH_AWS_ACCESS_KEY_ID` }}",
         "cloudwatch_aws_secret_access_key": "{{ env `CLOUDWATCH_AWS_SECRET_ACCESS_KEY` }}"
     },
@@ -23,8 +23,8 @@
         "enhanced_networking": true,
         "encrypt_boot": true,
         "ami_name": "opszero-{{user `ami`}}-{{isotime `2006-01-02` | clean_ami_name}}-{{timestamp}}",
-        "access_key": "{{user `aws_access_key`}}",
-        "secret_key": "{{user `aws_secret_key`}}",
+        "access_key": "{{user `aws_access_key_id`}}",
+        "secret_key": "{{user `aws_secret_access_key`}}",
         "tags": {
             "image": "opsZero-auditKube"
         }
