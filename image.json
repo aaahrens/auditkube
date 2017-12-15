@@ -1,6 +1,6 @@
 {
     "variables": {
-        "ami": "k8s-1.7-debian-jessie-amd64-hvm-ebs-2017-07-28",
+        "ami": "k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02",
         "region": "{{ env `AWS_REGION` }}",
         "aws_access_key_id": "{{ env `AWS_ACCESS_KEY_ID` }}",
         "aws_secret_access_key": "{{ env `AWS_SECRET_ACCESS_KEY` }}",
@@ -26,7 +26,7 @@
         "access_key": "{{user `aws_access_key_id`}}",
         "secret_key": "{{user `aws_secret_access_key`}}",
         "tags": {
-            "image": "opsZero-auditKube"
+            "image": "opszero-auditkube"
         }
     }],
     "provisioners": [{

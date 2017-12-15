@@ -10,7 +10,7 @@ with PCI/HIPAA Compliance.
 
  - [X] Encrypted Root Volume
  - [X] [OSSEC](https://ossec.github.io/): File System Monitoring for Changes.
- - [ ] Build Public Image on All Regions
+ - [X] Build Public Image on All Regions
  - [ ] Support Different Logging Mechanisms for the Image
  - [ ] 2FA Login
 
@@ -52,6 +52,10 @@ ec2:DescribeTags
 Base Image is created used the Stable Image here:
 
 https://github.com/kubernetes/kops/tree/master/channels
+
+# Supported Images
+
+ - [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B075CNX5F8?qid=1504900511561&sr=0-1&ref_=srh_res_product_title)
 
 # Project by opsZero
 
