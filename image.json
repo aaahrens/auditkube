@@ -1,6 +1,6 @@
 {
     "variables": {
-        "ami": "k8s-1.6-debian-jessie-amd64-hvm-ebs-2017-05-02",
+        "ami": "k8s-1.7-debian-jessie-amd64-hvm-ebs-2017-07-28",
         "region": "{{ env `AWS_REGION` }}",
         "aws_access_key_id": "{{ env `AWS_ACCESS_KEY_ID` }}",
         "aws_secret_access_key": "{{ env `AWS_SECRET_ACCESS_KEY` }}",
@@ -36,8 +36,17 @@
         },
         {
             "scripts": [
-                "ami/ossec.sh",
-                "ami/cloudwatch.sh {{user `cloudwatch_aws_access_key_id`}} {{user `cloudwatch_aws_secret_access_key`}}"
+                "ami/ossec.sh"
+            ],
+            "type": "shell"
+        },
+        {
+            "environment_vars": [
+                "CLOUDWATCH_AWS_ACCESS_KEY_ID={{user `cloudwatch_aws_access_key_id`}}",
+                "CLOUDWATCH_AWS_SECRET_ACCESS_KEY={{user `cloudwatch_aws_secret_access_key`}}"
+            ],
+            "scripts": [
+                "ami/cloudwatch.sh"
             ],
             "type": "shell"
         },

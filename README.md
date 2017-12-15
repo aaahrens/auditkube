@@ -19,13 +19,10 @@ with PCI/HIPAA Compliance.
 This image is created using [Packer](https://www.packer.io/) so you will need
 to install it. Once you are done edit [image.json](./image.json)
 
-Update the `region`, `aws_access_key` and `aws_secret_key` with the
-appropriate regions.
-
 To actually build the image run the following:
 
 ```
-packer build image.json
+REGION=us-west-2 AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar packer build image.json
 ```
 
 To use this image with `kops` you need to pass in the AMI name listed.

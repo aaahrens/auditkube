@@ -1,28 +1,25 @@
 #!/bin/bash -ex
 
-AWS_ACCESS_KEY_ID=$1; shift
-AWS_SECRECT_ACCCESS_KEY=$1
-
-if [[ -n $AWS_ACCESS_KEY_ID ]]
+if [[ -n $CLOUDWATCH_AWS_ACCESS_KEY_ID ]]
 then
     sudo apt-get update -y
-    sudo apt-get install unzip libwww-perl libdatetime-perlthen
+    sudo apt-get install -y unzip libwww-perl libdatetime-perl
 
     pushd /tmp/
     curl http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip -O
     unzip CloudWatchMonitoringScripts-1.2.1.zip
     rm CloudWatchMonitoringScripts-1.2.1.zip
 
-    mv aws-scripts-mon /etc
+    sudo mv aws-scripts-mon /etc
     pushd /etc/aws-scripts-mon
 
-    echo "AWSAccessKeyId=${AWS_ACCESS_KEY_ID}" > awscreds.conf
-    echo "AWSSecretKey=${AWS_SECRECT_ACCCESS_KEY}" >> awscreds.conf
+    sudo echo "AWSAccessKeyId=${CLOUDWATCH_AWS_ACCESS_KEY_ID}" > awscreds.conf
+    sudo echo "AWSSecretKey=${CLOUDWATCH_AWS_SECRET_ACCCESS_KEY}" >> awscreds.conf
 
-    sudo crontab -l > /tmp/new_crontab
-    sudo echo "*/5 * * * * /etc/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --disk-space-util --disk-path=/ --from-cron" >> /tmp/new_crontab
-    sudo crontab /tmp/new_crontab
-    sudo rm /tmp/new_crontab
+    crontab -l > /tmp/new_crontab
+    echo "*/5 * * * * /etc/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --disk-space-util --disk-path=/ --from-cron" >> /tmp/new_crontab
+    crontab /tmp/new_crontab
+    rm /tmp/new_crontab
 
     popd
     popd

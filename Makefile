@@ -1,4 +1,9 @@
 build:
+	AWS_REGION=$(shell aws configure get bonafide.region) \
+	AWS_ACCESS_KEY_ID=$(shell aws configure get bonafide.aws_access_key_id) \
+	AWS_SECRET_ACCESS_KEY=$(shell aws configure get bonafide.aws_secret_access_key) \
+	CLOUDWATCH_AWS_ACCESS_KEY_ID=$(shell aws configure get bonafide.aws_access_key_id) \
+	CLOUDWATCH_AWS_SECRET_ACCESS_KEY=$(shell aws configure get bonafide.aws_secret_access_key) \
 	packer build image.json
 
 release: aws-marketplace
