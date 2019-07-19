@@ -93,3 +93,26 @@ resource "aws_iam_role_policy" "autoscaling" {
 }
 EOF
 }
+
+data "aws_iam_policy_document" "ec2_cloudwatch" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals = {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
+
+resource "aws_iam_role" "ec2_cloudwatch" {
+  name = "cloudwatch-ec2-role"
+
+  assume_role_policy = "${data.aws_iam_policy_document.ec2_cloudwatch.json}"
+
+  tags = {
+    Name = "cloudwatch-ec2-role"
+  }
+}
