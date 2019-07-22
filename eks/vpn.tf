@@ -97,7 +97,6 @@ sleep 15
 
 /opt/bin/config.py $file
 
-
 if [[ ${var.logdna_ingestion_key} == ""  ]]
 then
     echo "Not Installing LogDNA."
@@ -114,6 +113,19 @@ else
     update-rc.d logdna-agent defaults
     /etc/init.d/logdna-agent start
 fi
+
+
+cat <<EOF > $file
+{
+  "psk": "${var.foxpass_vpn_psk}",
+  "dns_primary": "8.8.8.8",
+  "dns_secondary": "8.8.4.4",
+  "local_cidr": "10.11.12.0/24",
+  "foxpass_api_key": "${var.foxpass_api_key}",
+  "require_groups" : [],
+  "name":"opszero-vpn-config"
+}
+EOF
 
 
 
