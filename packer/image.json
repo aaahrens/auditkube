@@ -22,7 +22,8 @@
             "type": "amazon-ebs",
             "encrypt_boot": true,
             "vpc_id": "vpc-0064081ab514521f2",
-            "subnet_id": "subnet-09c4e5b4dd611444b"
+            "subnet_id": "subnet-09c4e5b4dd611444b",
+            "associate_public_ip_address": true
         }
     ],
 
