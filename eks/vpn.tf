@@ -1,7 +1,7 @@
 resource "aws_eip" "vpn_eip" {
   instance = aws_instance.vpn[0].id
   vpc      = true
-  count       = var.foxpass_api_key != "" ? 1 : 0
+  count    = var.foxpass_api_key != "" ? 1 : 0
 }
 
 resource "aws_security_group" "vpn" {
@@ -114,25 +114,18 @@ else
     /etc/init.d/logdna-agent start
 fi
 
-
-cat <<EOF > $file
-{
-  "psk": "${var.foxpass_vpn_psk}",
-  "dns_primary": "8.8.8.8",
-  "dns_secondary": "8.8.4.4",
-  "local_cidr": "10.11.12.0/24",
-  "foxpass_api_key": "${var.foxpass_api_key}",
-  "require_groups" : [],
-  "name":"opszero-vpn-config"
-}
-EOF
-
-
-
 SCRIPT
 
   tags = {
     Name = "${var.cluster-name}-vpn"
+  }
+}
+
+data "template_file" "cloudwatch" {
+  template = file("${path.module}/template/cloudwatch_agent_config.tpl")
+  vars = {
+    metrics_collection_interval: 60,
+    disk_resources: "/",
   }
 }
 

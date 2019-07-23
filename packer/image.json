@@ -72,6 +72,25 @@
             "type": "shell",
             "execute_command": "sudo -S env {{ .Vars }} {{ .Path }}",
             "script": "ami/install_agent.sh"
+        },
+        {
+            "type": "shell",
+            "execute_command": "sudo -S env {{ .Vars }} {{ .Path }}",
+            "inline": [
+                "mkdir -p /opt/aws/amazon-cloudwatch-agent/etc"
+            ]
+        },
+        {
+            "type":"file",
+            "source": "ami/cloudwatch.json",
+            "destination": "/tmp/cloudwatch.json"
+        },
+        {
+            "type": "shell",
+            "execute_command": "sudo -S env {{ .Vars }} {{ .Path }}",
+            "inline": [
+                "cat /tmp/cloudwatch.json >> /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json"
+            ]
         }
     ]
 }

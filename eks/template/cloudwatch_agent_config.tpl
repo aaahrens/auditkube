@@ -1,4 +1,3 @@
-
 {
   "metrics": {
     "aggregation_dimensions": [
@@ -17,8 +16,8 @@
           "cpu_usage_user",
           "cpu_usage_system"
         ],
-        "metrics_collection_interval": ${metrics_collection_interval},
-        ${cpu_resources}
+        "metrics_collection_interval": 60,
+        "resources": ["*"],
         "totalcpu": true
       },
       "disk": {
@@ -34,7 +33,7 @@
           "io_time"
         ],
         "metrics_collection_interval": ${metrics_collection_interval},
-        "resources": ${disk_resources}
+        "resources": "/"
       },
       "mem": {
         "measurement": [

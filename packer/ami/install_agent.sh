@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # SOURCE FOR THE IS HERE https://github.com/cloudposse/terraform-aws-cloudwatch-agent/blob/master/templates/cloud_init.yaml
+
 export NAME=$(cat /etc/os-release)
 echo ${NAME}
 case ${NAME} in
