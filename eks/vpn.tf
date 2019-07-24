@@ -120,12 +120,3 @@ SCRIPT
     Name = "${var.cluster-name}-vpn"
   }
 }
-
-data "template_file" "cloudwatch" {
-  template = file("${path.module}/template/cloudwatch_agent_config.tpl")
-  vars = {
-    metrics_collection_interval: 60,
-    disk_resources: "/",
-  }
-}
-
